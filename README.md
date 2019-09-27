@@ -4,9 +4,9 @@
 This is a modification of the DIY variant of the tapecart to
 have more than 2MB space available on flash to C64 when a
 bigger Q25Wxx chip is used.
-ccording to plans the firmware will check the size of the EEPROM during
+According to plans the firmware will check the size of the EEPROM during
 startup and report back the correct value. At first only hardcoded
-8MB will be implmented for testing purposes, as tapecart-browser also
+8MB will be implemented for testing purposes, as tapecart-browser also
 has to be modified.
 
 For creating the build environment install a barebone linux (Ubuntu is 
