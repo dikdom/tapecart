@@ -1,3 +1,21 @@
+
+# tapecart DIY mod for 8MB flash access
+
+This is a modification of the DIY variant of the tapecart to
+have more than 2MB space available on flash to C64 when a
+bigger Q25Wxx chip is used.
+ccording to plans the firmware will check the size of the EEPROM during
+startup and report back the correct value. At first only hardcoded
+8MB will be implmented for testing purposes, as tapecart-browser also
+has to be modified.
+
+For creating the build environment install a barebone linux (Ubuntu is 
+my personal choice) and install the following extra packages:
+make gcc perl avr-libc git cc65 php mc xa65 gawk haskell-stack
+
+After that follow the original build descriptions found in the subdirectories'
+README file!
+
 # tapecart #
 
 tapecart - a tape port storage pod for the C64
