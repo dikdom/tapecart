@@ -599,12 +599,12 @@ static void read_deviceinfo(void) {
 static void read_devicesizes(void) {
   /* no parameters
    * reply:
-   *   3 extmem total size (in byte)
+   *   3 extmem total size (in byte. In case of W25Q it queries from flash chip)
    *   2 extmem page  size (in byte)
    *   2 extmem erase size (in pages - if 0, direct byte write supported)
    */
 
-  if (send_u24(CONFIG_EXTMEM_SIZE))
+  if (send_u24(extmem_getsize()))
     return;
 
   if (send_u16(CONFIG_EXTMEM_PAGE_SIZE))

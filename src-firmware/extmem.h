@@ -49,4 +49,6 @@ bool    extmem_write_isbusy(void);
 
 void    extmem_erase(uint24 address);
 
+uint24  extmem_getsize(void);
+
 #endif
