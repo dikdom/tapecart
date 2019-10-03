@@ -46,7 +46,6 @@
 #define CMD_BUFFER_ERASE_PGM_1 0x83
 #define CMD_BUFFER_WRITE_1     0x84
 #define CMD_READ_STATUS        0xd7
-#define CMD_READ_DEVICE_ID     0x9f
 
 #define STATUS_PAGESIZE        (1<<0)
 #define STATUS_READY           (1<<7)
@@ -167,4 +166,8 @@ void extmem_erase(uint24 address) {
 
     while (extmem_write_isbusy()) ;
   }
+}
+
+inline uint24 extmem_getsize() {
+  return (uint24)CONFIG_EXTMEM_SIZE;
 }

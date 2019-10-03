@@ -99,3 +99,7 @@ void extmem_erase(uint24 address) {
 
   while (extmem_write_isbusy()) ;
 }
+
+inline uint24  extmem_getsize() {
+  return (uint24)CONFIG_EXTMEM_SIZE;
+}

@@ -42,8 +42,11 @@
 #define CMD_SECTOR_ERASE       0x20
 #define CMD_READ_DATA          0x03
 #define CMD_READ_STATUS_1      0x05
+#define CMD_READ_DEVICE_ID     0x9F
 
 #define STATUS1_BUSY           (1<<0)
+
+static uint24 extmem_size;
 
 static void spi_send_24bit(uint24 address) {
   spi_exchange_byte((address >> 16) & 0xff);
@@ -59,6 +62,28 @@ static void send_writeenable(void) {
 
 void extmem_init(void) {
   spi_init();
+
+  spi_set_ss(SPISS_LOW);
+  spi_exchange_byte(CMD_READ_DEVICE_ID);
+  uint8_t manufacturer_id = spi_exchange_byte(0xff);
+  spi_exchange_byte(0xff); // drop flash type
+  uint8_t size         = spi_exchange_byte(0xff);
+  if (manufacturer_id == 0xef) {
+    if (size == 0x14) {
+	  extmem_size = (uint24)1048576; // 1024*1024, W25Q80
+	} else if (size == 0x15) {
+	  extmem_size = (uint24)2097152; // 2*1024*1024, W25Q16
+	} else if (size == 0x16) {
+	  extmem_size = (uint24)4194304; // 4*1024*1024, W25Q32
+	} else if (size == 0x17) {
+	  extmem_size = (uint24)8388608; // 8*1024*1024, W25Q64
+	} else if (size == 0x18) {
+	  extmem_size = (uint24)8388608; // 16*1024*1024, W25Q128 - highest addressable space
+	}
+  } else {
+    extmem_size = (uint24)2097152; // defaulting to 2MB
+  }
+  spi_set_ss(SPISS_HIGH);
 }
 
 void extmem_read_start(uint24 address) {
@@ -109,4 +134,8 @@ void extmem_erase(uint24 address) {
   spi_exchange_byte(CMD_SECTOR_ERASE);
   spi_send_24bit(address);
   spi_set_ss(SPISS_HIGH);
+}
+
+inline uint24 extmem_getsize() {
+  return extmem_size;
 }
