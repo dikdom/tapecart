@@ -11,7 +11,7 @@ has to be modified.
 
 For creating the build environment install a barebone linux (Ubuntu is 
 my personal choice) and install the following extra packages:
-make gcc perl avr-libc git cc65 php mc xa65 gawk haskell-stack
+make gcc perl avr-libc git cc65 php mc xa65 gawk haskell-stack libghc-bzlib-dev
 
 After that follow the original build descriptions found in the subdirectories'
 README file!
