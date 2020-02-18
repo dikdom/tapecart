@@ -314,13 +314,27 @@ static void loader_handler(void) {
 /* ====================================================================== */
 
 int main(void) {
+	int i;
   /* misc init calls */
   system_init();
   ioport_init();
+  
+    for(i=0; i<5; i++) {
+	  LED_PORT   |=  _BV(LED_BIT);
+	  LED_DDR    &= ~_BV(LED_BIT);
+	  _delay_ms(200);
+	  LED_PORT   &= ~_BV(LED_BIT);
+	  LED_DDR    |=  _BV(LED_BIT);
+	  _delay_ms(200);
+  }
+
+  
   uart_init();
   extmem_init();
   pulsetimer_init();
   enable_interrupts();
+
+ 
 
 #if defined(HAVE_UART) && defined(ALLOW_RAMEXEC)
   /* check if an external flash tool is connected */

@@ -68,6 +68,7 @@ void extmem_init(void) {
   uint8_t manufacturer_id = spi_exchange_byte(0xff);
   spi_exchange_byte(0xff); // drop flash type
   uint8_t size         = spi_exchange_byte(0xff);
+  extmem_size = (uint24)2097152; // defaulting to 2MB
   if (manufacturer_id == 0xef) {
     if (size == 0x14) {
 	  extmem_size = (uint24)1048576; // 1024*1024, W25Q80
@@ -80,10 +81,8 @@ void extmem_init(void) {
 	} else if (size == 0x18) {
 	  extmem_size = (uint24)8388608; // 16*1024*1024, W25Q128 - highest addressable space
 	}
-  } else {
-    extmem_size = (uint24)2097152; // defaulting to 2MB
   }
-  spi_set_ss(SPISS_HIGH);
+   spi_set_ss(SPISS_HIGH);
 }
 
 void extmem_read_start(uint24 address) {
