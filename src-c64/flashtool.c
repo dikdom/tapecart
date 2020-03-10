@@ -304,7 +304,7 @@ static void display_cartinfo(void) {
   cprintf("Ident: %s\r\n", databuffer);
 
   gotoxy(0, 6);
-  cprintf("Total size: %7ld byte", total_size);
+  cprintf("Total size: %8ld byte", total_size);
 
   gotoxy(0, 7);
   cprintf("Page size : %7d byte", page_size);

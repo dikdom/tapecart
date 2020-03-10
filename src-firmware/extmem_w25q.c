@@ -80,7 +80,7 @@ void extmem_init(void) {
 	} else if (size == 0x17) {
 	  extmem_size = (uint24)8388608; // 8*1024*1024, W25Q64
 	} else if (size == 0x18) {
-	  extmem_size = (uint24)16777216; // 16*1024*1024, W25Q128 - highest addressable space
+	  extmem_size = (uint24)16777215; // 16*1024*1024-1, W25Q128 - highest addressable space
 	}
   }
 }
