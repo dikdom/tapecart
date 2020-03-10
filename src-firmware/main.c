@@ -319,13 +319,11 @@ int main(void) {
   system_init();
   ioport_init();
   
-    for(i=0; i<5; i++) {
-	  LED_PORT   |=  _BV(LED_BIT);
-	  LED_DDR    &= ~_BV(LED_BIT);
-	  _delay_ms(200);
-	  LED_PORT   &= ~_BV(LED_BIT);
-	  LED_DDR    |=  _BV(LED_BIT);
-	  _delay_ms(200);
+  for(i=0; i<5; i++) {
+    set_led(true);
+    delay_ms(200);
+    set_led(false);
+    delay_ms(200);
   }
 
   
